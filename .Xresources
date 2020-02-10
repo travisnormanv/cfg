@@ -34,7 +34,7 @@
 URxvt.intensityStyles:	false
 URxvt.background:       #000000
 URxvt.depth:		32
-URxvt.font: 		xft:monospace:size=12,\
+URxvt.font: 		xft:monospace:size=10,\
 			xft:Noto Sans CJK JP Medium:style=Medium
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
