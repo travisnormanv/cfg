@@ -222,3 +222,4 @@ exec firefox
 # other keybindings
 bindsym $mod+w exec urxvt -e ranger
 bindsym $mod+e exec emacs
+bindsym $mod+x exec i3lock -i ~/.wallpapers/joker_green.png

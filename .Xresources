@@ -8,8 +8,10 @@
 *color0: #1b1918
 *color8: #766e6b
 !! red
-*color1: #f22c40
-*color9: #f22c40
+!! *color1: #f22c40
+!! *color9: #f22c40
+*color1: #a8a19f
+*color9: #f1efee
 !! green
 *color2: #5ab738
 *color10: #5ab738
@@ -17,14 +19,20 @@
 *color3: #d5911a
 *color11: #d5911a
 !! blue
-*color4: #407ee7
-*color12: #407ee7
+!! *color4: #407ee7
+!! *color12: #407ee7
+*color4: #d5911a
+*color12: #d5911a
 !! magenta
-*color5: #6666ea
-*color13: #6666ea
+!! *color5: #6666ea
+!! *color13: #6666ea
+*color5: #5ab738
+*color13: #5ab738
 !! cyan
-*color6: #00ad9c
-*color14: #00ad9c
+!! *color6: #00ad9c
+!! *color14: #00ad9c
+*color6: #00cc00
+*color14: #00cc00 
 !! white
 *color7: #a8a19f
 *color15: #f1efee
@@ -32,7 +40,7 @@
 !! URxvt.transparent:	true
 !! URxvt.shading:		15
 URxvt.intensityStyles:	false
-URxvt.background:       #000000
+!! URxvt.background:       #000000
 URxvt.depth:		32
 URxvt.font: 		xft:monospace:size=10,\
 			xft:Noto Sans CJK JP Medium:style=Medium
