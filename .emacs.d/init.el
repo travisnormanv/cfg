@@ -36,7 +36,7 @@
 
 ;; global set up
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 (setq-default display-line-numbers 'relative)
 
 (custom-set-variables
@@ -45,8 +45,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	 (quote
-		(evil-org company tide web-mode ibus key-chord evil xresources-theme which-key-posframe lorem-ipsum helm-config popup async emacs-async which-key try base16-theme))))
+   (quote
+	(ace-window transpose-frame evil-org company tide web-mode ibus key-chord evil xresources-theme which-key-posframe lorem-ipsum helm-config popup async emacs-async which-key try base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -69,6 +69,21 @@
 (use-package which-key
   :ensure t
   :config (which-key-mode))
+
+;; transpose-frame
+(use-package transpose-frame
+  :load-path "~/.emacs.d/elpa/git-packages/transpose-frame/")
+
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+	(global-set-key [remap other-window] 'ace-window)
+	(custom-set-faces
+	 '(aw-leading-char-face
+	   ((t (:inherit ace-jump-face-foreground :height 3.0))))
+	))
+  
 
 ;; other packages (git, etc.) ==========
 
@@ -154,9 +169,9 @@
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-mode 1)
 	(define-key evil-normal-state-map (kbd "o")
-		(lambda() (interactive) (evil-insert-newline-below)))
+	 	(lambda() (interactive) (evil-insert-newline-below)))
 	(define-key evil-normal-state-map (kbd "O")
-		(lambda() (interactive) (evil-insert-newline-above)))
+	 	(lambda() (interactive) (evil-insert-newline-above)))
 	(define-key evil-normal-state-map (kbd "/")
 		(lambda() (interactive) (helm-swoop-from-evil-search)))
 	(setq evil-shift-width 2)
