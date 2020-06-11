@@ -35,9 +35,12 @@
  version-control t)       ; use versioned backups
 
 ;; global set up
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+(require 'green-is-the-new-black-theme)
+(global-set-key (kbd "C-c C-c") 'comment-line)
 (setq-default tab-width 4)
 (setq-default display-line-numbers 'relative)
+(global-set-key (kbd "C-x d") 'dired-jump)
+(global-company-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -46,13 +49,13 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-	(ace-window transpose-frame evil-org company tide web-mode ibus key-chord evil xresources-theme which-key-posframe lorem-ipsum helm-config popup async emacs-async which-key try base16-theme))))
+	(projectile green-phosphor aggressive-indent yasnippet ya-snippet ace-window transpose-frame evil-org company tide web-mode ibus key-chord evil xresources-theme which-key-posframe lorem-ipsum helm-config popup async emacs-async which-key try base16-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
 
 ;; installed packages ==========
 
@@ -70,6 +73,12 @@
   :ensure t
   :config (which-key-mode))
 
+;; aggresive-indents
+(use-package aggressive-indent
+  :ensure t
+  :config
+  (global-aggressive-indent-mode 1))
+
 ;; transpose-frame
 (use-package transpose-frame
   :load-path "~/.emacs.d/elpa/git-packages/transpose-frame/")
@@ -82,16 +91,17 @@
 	(custom-set-faces
 	 '(aw-leading-char-face
 	   ((t (:inherit ace-jump-face-foreground :height 3.0))))
-	))
-  
+	)))
 
-;; other packages (git, etc.) ==========
-
-;; provide random sentences, paragraphs
-;; (use-package lorem-ipsum
-;;   :load-path "~/.emacs.d/elpa/git-packages/lorem-ipsum/" 
-;;   :init
-;;   (require 'lorem-ipsum))
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1)
+  :config
+  (setq yas-snippet-dirs
+		'("~/.emacs.d/snippets"))
+  (yas-reload-all)
+  (add-hook 'js-mode-hook 'yas-minor-mode))
 
 ;; emacs-async, heml dependency
 (use-package async
@@ -137,9 +147,12 @@
 
 ;; company
 (use-package company
-  :ensure t)
+  :ensure t
+  :config
+  (setq company-show-numbers t))
 
-;; tide
+
+;; tide (javascript intellisense)
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -168,13 +181,14 @@
   (setq key-chord-two-keys-delay 0.5)
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-mode 1)
-	(define-key evil-normal-state-map (kbd "o")
-	 	(lambda() (interactive) (evil-insert-newline-below)))
-	(define-key evil-normal-state-map (kbd "O")
-	 	(lambda() (interactive) (evil-insert-newline-above)))
-	(define-key evil-normal-state-map (kbd "/")
-		(lambda() (interactive) (helm-swoop-from-evil-search)))
-	(setq evil-shift-width 2)
+  (define-key evil-normal-state-map (kbd "o")
+	(lambda() (interactive) (evil-insert-newline-below)))
+  (define-key evil-normal-state-map (kbd "O")
+	(lambda() (interactive) (evil-insert-newline-above)))
+  (define-key evil-normal-state-map (kbd "/")
+	(lambda() (interactive) (helm-swoop-from-evil-search)))
+  (define-key evil-normal-state-map (kbd "TAB") 'tab-to-tab-stop)
+  (setq evil-shift-width 2)
   (evil-mode 1))
 
 (use-package evil-org
@@ -188,6 +202,9 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-;; use xresources theme
-(use-package xresources-theme
-  :ensure t)
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'helm))

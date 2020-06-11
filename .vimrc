@@ -17,19 +17,39 @@ runtime! archlinux.vim
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
 
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 " alow syntax colors"
 syntax on
 
-"make jj do esc"
-inoremap jj <Esc>
-
-"use relativenumber"
+" use hybrid liner numbering"
 set relativenumber
+set nonumber norelativenumber
+set number! relativenumber!
 
-"use colorscheme"
+" use colorscheme"
 set t_Co=256
 
-"new line w/out insert mode"
+" mappping
+" new line w/out insert mode"
 nnoremap o o<Esc>
 nnoremap O O<Esc>
+" make jj do esc"
+inoremap jj <Esc>
+
+" filename on tabs
+set guitablabel=%t
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" read vimrc file on external directory
+set exrc
+
+" prevent executing external command, write to file etc.
+set secure

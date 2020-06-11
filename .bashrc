@@ -40,7 +40,7 @@ alias ls="ls --color=auto --group-directories-first"
 alias sc="sudo systemctl"
 alias p="sudo pacman"
 alias t="tmux"
-#alias em="emacs -nw"
+alias em="emacs -nw"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 # If not running interactively, don't do anything

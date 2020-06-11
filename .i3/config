@@ -213,9 +213,8 @@ exec picom --config ~/.picom.conf -b
 exec sh ~/.fehbg
 exec ibus-daemon -drx
 
-# app behaviour
-exec emacs
-
+# ap behaviour
+exec urxvt
 assign [class="firefox"] $ws2
 exec firefox
 
